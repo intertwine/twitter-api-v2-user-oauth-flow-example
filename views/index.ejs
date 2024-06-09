@@ -11,6 +11,9 @@
     <div id="root">
       <strong>Hello!</strong>
       <br>
+      <% if (authMode === 'oauth2') { %>
+        <a href="<%= authLink %>">Click here</a> to start OAuth2 login flow in your application.
+      <% } %>
       <% if (authMode === 'callback') { %>
         <a href="<%= authLink %>">Click here</a> to start login flow in your application.
       <% } %>

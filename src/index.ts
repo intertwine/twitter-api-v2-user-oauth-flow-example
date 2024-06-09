@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import session from 'express-session';
 import CONFIG from './config';
 import callbackRouter from './routes/callback';
+import oauth2Router from './routes/oauth2';
 import pinRouter from './routes/pin';
 
 // -- STARTUP --
@@ -10,6 +11,8 @@ declare module 'express-session' {
   interface SessionData {
     oauthToken?: string;
     oauthSecret?: string;
+    state?: string;
+    codeVerifier?: string;
   }
 }
 
@@ -29,6 +32,7 @@ app.set('view engine', 'ejs');
 
 // -- ROUTES --
 
+app.use(oauth2Router);
 app.use(callbackRouter);
 app.use(pinRouter);
 
